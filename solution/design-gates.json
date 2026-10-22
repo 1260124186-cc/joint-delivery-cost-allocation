@@ -1,0 +1,86 @@
+{
+  "name": "joint-delivery-cost-allocation",
+  "category": "H-数学问题",
+  "scene": "冷链零担订单并车后，按合作博弈的 Shapley 值向商户分摊配送费用，并保留分段数学结果供财务复核",
+  "core_task": "修正精确最优巡回、全子集 Shapley 有理数分摊、最大余数整数分币与输入拒收，使四段命令及一次串行运行结果一致",
+  "data_provenance": {
+    "kind": "generated",
+    "source": "演示坐标由固定种子 20261022 的整数坐标生成规则产生，再从候选集合中选取最近邻巡回明显非最优的实例；仅为可复现重算样例，不表示现场采集，也不冒充真实商户数据",
+    "seed": 20261022
+  },
+  "answer_verification": "独立实现枚举每个非空子集的全部门店排列，按 50 位 Decimal 欧氏距离、1e-18 米量化、road_factor 和整数半入规则复算 v(S)；用 Fraction 按 Shapley 权重逐子集求精确值并核对效率性；再用最大余数法独立分配整数分，核对总和、并列次序和逐项差额",
+  "environment": {
+    "base_image": "python:3.12.8-slim-bookworm@sha256:2199a62885a12290dc9c5be3ca0681d367576ab7bf037da120e564723292a2f0",
+    "dependencies_locked": true,
+    "allow_internet": true,
+    "network_reason": "求解器只用 Python 标准库，输入随镜像提供；任务镜像只做离线计算，验证阶段需从 PyPI 按哈希安装 pytest 等测试依赖，真实模型运行阶段由 Harbor 安装所选 agent",
+    "architectures": ["amd64", "arm64"]
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "statement": "对每个非空门店子集输出最短闭合巡回、确定性并列顺序和整趟半入后的整数费用",
+      "observable": "coalitions 阶段覆盖全部子集，tour 与枚举排列得到的最短里程和字典序一致，cost_cents 只在整趟巡回后取整",
+      "expected_basis": "欧氏里程乘 road_factor；整趟里程量化到 1e-18 米后比较，再比较门店编号序列字典序；最后统一 half-up 一次",
+      "test_ids": ["T1", "T2", "T3", "T4", "T13", "T14", "T15"]
+    },
+    {
+      "id": "R2",
+      "statement": "按给定全部子集费用用精确有理数计算 Shapley 值，并保持效率性",
+      "observable": "shapley 阶段输出约分后的分子分母，各份额之和精确等于全部门店集合的费用",
+      "expected_basis": "phi_i 使用 |S|!(n-|S|-1)!/n! 权重与边际贡献求和，全程 Fraction 运算",
+      "test_ids": ["T5", "T6", "T7", "T8", "T13", "T14", "T15"]
+    },
+    {
+      "id": "R3",
+      "statement": "在门店结算上限内最小化整数分配相对精确份额的平方偏差，并拒绝坏输入且不破坏已有输出",
+      "observable": "settle 阶段每个金额不超过对应上限、总和等于总额，平方目标最小且在并列时选择字典序最小金额向量；坏份额或不可行上限非零退出",
+      "expected_basis": "离散凸目标 sum((x_i-phi_i)^2) 的增量成本为 2k-1-2phi_i；按增量排序并受上限约束选取，最后比较金额向量字典序",
+      "test_ids": ["T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16"]
+    }
+  ],
+  "tests": [
+    {"id": "T1", "kind": "normal", "requirement_ids": ["R1"], "expected": "单门店巡回与整趟半入费用正确"},
+    {"id": "T2", "kind": "normal", "requirement_ids": ["R1"], "expected": "两门店巡回取总里程较短方向"},
+    {"id": "T3", "kind": "normal", "requirement_ids": ["R1"], "expected": "最近邻明显非最优时仍返回全局最短巡回"},
+    {"id": "T4", "kind": "boundary", "requirement_ids": ["R1"], "expected": "未取整里程相同时按门店编号序列字典序破同分"},
+    {"id": "T5", "kind": "normal", "requirement_ids": ["R2"], "expected": "两门店共享费用按边际贡献得到各 75 分"},
+    {"id": "T6", "kind": "normal", "requirement_ids": ["R2"], "expected": "四门店任意联盟费用得到精确约分 Shapley 份额"},
+    {"id": "T7", "kind": "normal", "requirement_ids": ["R2"], "expected": "可加联盟费用下 Shapley 值与单店权重一致"},
+    {"id": "T8", "kind": "exception", "requirement_ids": ["R2"], "expected": "联盟费用缺子集时非零退出且不写结果"},
+    {"id": "T9", "kind": "normal", "requirement_ids": ["R3"], "expected": "三等分且末次边际并列时按金额向量字典序分配"},
+    {"id": "T10", "kind": "boundary", "requirement_ids": ["R3"], "expected": "多项边际并列时平方目标与字典序破同分正确"},
+    {"id": "T11", "kind": "exception", "requirement_ids": ["R3"], "expected": "未约分、负分子或份额和不等于总额时非零退出"},
+    {"id": "T12", "kind": "exception", "requirement_ids": ["R3"], "expected": "坏输入不覆盖已有输出文件"},
+    {"id": "T13", "kind": "normal", "requirement_ids": ["R1", "R2", "R3"], "expected": "示例实例四段串联结果与独立复算一致"},
+    {"id": "T14", "kind": "normal", "requirement_ids": ["R1", "R2", "R3"], "expected": "另一组六门店实例的巡回、精确份额和整数结算一致"},
+    {"id": "T15", "kind": "boundary", "requirement_ids": ["R1", "R2", "R3"], "expected": "十门店实例在单次命令时限内完成最优巡回、精确份额和整数结算"},
+    {"id": "T16", "kind": "boundary", "requirement_ids": ["R3"], "expected": "门店结算上限绑定时在平方目标下重新分配整数分"}
+  ],
+  "challenges": [
+    {
+      "id": "C1",
+      "description": "全子集闭合巡回的全局最优性与十门店可计算性",
+      "failure_mode": "按最近邻或输入顺序行走会给出次优巡回；直接生成十门店全部排列又会超出单次命令时限",
+      "fix_action": "用门店子集动态规划求全局最短路，并先用量化里程再按编号序列处理并列",
+      "requirement_ids": ["R1"],
+      "test_ids": ["T1", "T2", "T3", "T4", "T15"]
+    },
+    {
+      "id": "C2",
+      "description": "Shapley 边际贡献的精确有理数计算",
+      "failure_mode": "使用均分、浮点边际或漏掉子集权重，导致份额不满足效率性或不是约分分数",
+      "fix_action": "从完整联盟费用表逐门店遍历不含该门店的子集，用 Fraction 乘组合权重并约分输出",
+      "requirement_ids": ["R2"],
+      "test_ids": ["T5", "T6", "T7", "T8"]
+    },
+    {
+      "id": "C3",
+      "description": "有上限的平方误差整数分配与坏输入保护",
+      "failure_mode": "继续使用最大余数会越过门店上限；逐项四舍五入或忽略并列字典序会得到错误金额向量",
+      "fix_action": "按离散凸目标的增量成本排序选择整数分，同时守住上限和总额，并在写入前校验份额及原子替换",
+      "requirement_ids": ["R3"],
+      "test_ids": ["T9", "T10", "T11", "T12", "T16"]
+    }
+  ]
+}

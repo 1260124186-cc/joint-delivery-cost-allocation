@@ -1,0 +1,47 @@
+{
+  "baseline": {
+    "reward": 0.0,
+    "evidence": "solution/evidence/baseline.log"
+  },
+  "oracle": {
+    "reward": 1.0,
+    "evidence": "solution/evidence/oracle.log"
+  },
+  "partials": [
+    {
+      "challenge_id": "C1",
+      "reward": 0.2,
+      "evidence": "solution/evidence/partial-c1.log"
+    },
+    {
+      "challenge_id": "C2",
+      "reward": 0.3,
+      "evidence": "solution/evidence/partial-c2.log"
+    },
+    {
+      "challenge_id": "C3",
+      "reward": 0.2,
+      "evidence": "solution/evidence/partial-c3.log"
+    }
+  ],
+  "bypasses": [
+    {
+      "id": "B1",
+      "description": "各阶段只返回空对象",
+      "reward": 0.0,
+      "evidence": "solution/evidence/bypass-empty.log"
+    },
+    {
+      "id": "B2",
+      "description": "固定返回公开示例的计算结果",
+      "reward": 0.0,
+      "evidence": "solution/evidence/bypass-fixed.log"
+    },
+    {
+      "id": "B3",
+      "description": "删除整数结算模块",
+      "reward": 0.0,
+      "evidence": "solution/evidence/bypass-delete.log"
+    }
+  ]
+}

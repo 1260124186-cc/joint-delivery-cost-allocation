@@ -1,0 +1,343 @@
+Command: docker run --rm --user 10001:10001 --network host -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-ursak09f/bypass-fixed/workspace:/workspace:ro -v /Users/zhangchengcheng/work/ai-project/Trea/harbor/joint-delivery-cost-allocation/tests:/tests:ro -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-ursak09f/bypass-fixed/logs:/logs harbor-quality:joint-delivery-cost-allocation bash /tests/test.sh
+Exit: 0
+Reward: 0.0
+stdout:
+Collecting pytest==8.4.1 (from -r /tests/requirements.txt (line 1))
+  Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+Collecting iniconfig==2.3.1 (from -r /tests/requirements.txt (line 2))
+  Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Collecting packaging==26.3 (from -r /tests/requirements.txt (line 3))
+  Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Collecting pluggy==1.7.0 (from -r /tests/requirements.txt (line 4))
+  Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Collecting pygments==2.21.0 (from -r /tests/requirements.txt (line 5))
+  Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 516.7 kB/s eta 0:00:00
+Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
+Successfully installed iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pygments-2.21.0 pytest-8.4.1
+
+stderr:
+  WARNING: The script pygmentize is installed in '/home/worker/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+  WARNING: The scripts py.test and pytest are installed in '/home/worker/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+
+[c1]
+FF.F                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ test_c1_single_order_round_trip ________________________
+
+    def test_c1_single_order_round_trip():
+        """Match the sole tour and its single rounded total."""
+        instance = make_instance(["A"], [(2400, 1800)], factor=1.25, rate=310, fee=700)
+        expected = route_reference(instance)
+        actual = run_json("coalitions", [instance])
+>       assert actual == {"instance_id": instance["instance_id"], "coalitions": expected}
+E       AssertionError: assert {'coalitions'...id': 'test-A'} == {'coalitions'...id': 'test-A'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 3025, 'members': ['A'], 'tour': ['D', 'A', 'D']}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:315: AssertionError
+_____________________ test_c1_two_order_direction_matters ______________________
+
+    def test_c1_two_order_direction_matters():
+        """Choose the cheaper of two closed two-stop directions."""
+        instance = make_instance(["A", "B"], [(800, 0), (5200, 0)], factor=1.1, rate=420, fee=1500)
+        expected = route_reference(instance)
+        actual = run_json("coalitions", [instance])
+>       assert actual == {"instance_id": instance["instance_id"], "coalitions": expected}
+E       AssertionError: assert {'coalitions'...': 'test-A-B'} == {'coalitions'...': 'test-A-B'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 2239, 'members': ['A'], 'tour': ['D', 'A', 'D']}, {'cost_cents': 6305, 'members': ['B'], 'tour': ['D', 'B', 'D']}, {'cost_cents': 6305, 'members': ['A', 'B'], 'tour': ['D', 'A', 'B', 'D']}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:323: AssertionError
+_______________________ test_c1_lexicographic_tie_break ________________________
+
+    def test_c1_lexicographic_tie_break():
+        """Break an equal-distance tour tie by the ordered stop identifiers."""
+        instance = make_instance(["A2", "A1"], [(3000, 0), (3000, 0)], factor=1.0, rate=100, fee=0)
+        expected = route_reference(instance)
+        actual = run_json("coalitions", [instance])
+>       assert actual == {"instance_id": instance["instance_id"], "coalitions": expected}
+E       AssertionError: assert {'coalitions'... 'test-A2-A1'} == {'coalitions'... 'test-A2-A1'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 600, 'members': ['A1'], 'tour': ['D', 'A1', 'D']}, {'cost_cents': 600, 'members': ['A2'], 'tour': ['D', 'A2', 'D']}, {'cost_cents': 600, 'members': ['A1', 'A2'], 'tour': ['D', 'A1', 'A2', 'D']}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:339: AssertionError
+=============================== warnings summary ===============================
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-5fot5vw4'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-30pgyy6t'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_c1_single_order_round_trip - AssertionE...
+FAILED ../tests/test_outputs.py::test_c1_two_order_direction_matters - Assert...
+FAILED ../tests/test_outputs.py::test_c1_lexicographic_tie_break - AssertionE...
+3 failed, 1 passed, 12 deselected, 2 warnings in 0.34s
+
+[c2]
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_________________________ test_c2_two_order_marginals __________________________
+
+    def test_c2_two_order_marginals():
+        """Split a two-order saving by the two exact marginal contributions."""
+        instance = make_instance(["A", "B"], [(1000, 0), (2000, 0)])
+        values = {("A",): 100, ("B",): 100, ("A", "B"): 150}
+        coalition_file = coalition_payload(instance, lambda members: values[members])
+        expected = shapley_reference(instance, coalition_file)
+        actual = run_json("shapley", [instance, coalition_file])
+>       assert actual == expected
+E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_...t_cents': 150}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 150}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 75, 'order_id': 'A'}, {'denominator': 1, 'numerator': 75, 'order_id': 'B'}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:349: AssertionError
+______________________ test_c2_four_order_exact_fractions ______________________
+
+    def test_c2_four_order_exact_fractions():
+        """Match every reduced Shapley fraction on a non-additive four-order game."""
+        instance = make_instance(
+            ["A1", "A2", "A3", "A4"],
+            [(900, 0), (1800, 1200), (2900, -700), (4100, 300)],
+        )
+    
+        def values(members):
+            """Return the fixed four-order coalition cost for these members."""
+            base = 70 * len(members) + sum(13 * int(member[1:]) for member in members)
+            bonus = 41 if {"A1", "A4"} <= set(members) else 0
+            discount = 19 if {"A2", "A3"} <= set(members) else 0
+            return base + bonus - discount
+    
+        coalition_file = coalition_payload(instance, values)
+        expected = shapley_reference(instance, coalition_file)
+        actual = run_json("shapley", [instance, coalition_file])
+>       assert actual == expected
+E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_...t_cents': 432}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 432}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 2, 'numerator': 207, 'order_id': 'A1'}, {'denominator': 2, 'numerator': 173, 'order_id': 'A2'}, {'denominator': 2, 'numerator': 199, 'order_id': 'A3'}, {'denominator': 2, 'numerator': 285, 'order_id': 'A4'}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:369: AssertionError
+________________________ test_c2_additive_game_identity ________________________
+
+    def test_c2_additive_game_identity():
+        """Return each order's own weight when the value function is additive."""
+        instance = make_instance(
+            ["N1", "N2", "N3"],
+            [(-1200, 400), (2100, -900), (3400, 1900)],
+        )
+        weights = {"N1": 37, "N2": 59, "N3": 83}
+        coalition_file = coalition_payload(instance, lambda members: sum(weights[item] for item in members))
+        expected = shapley_reference(instance, coalition_file)
+        actual = run_json("shapley", [instance, coalition_file])
+>       assert actual == expected
+E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_...t_cents': 179}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 179}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 37, 'order_id': 'N1'}, {'denominator': 1, 'numerator': 59, 'order_id': 'N2'}, {'denominator': 1, 'numerator': 83, 'order_id': 'N3'}]}
+E         Use -v to get more diff
+
+/tests/test_outputs.py:382: AssertionError
+______________________ test_c2_missing_coalition_rejected ______________________
+
+    def test_c2_missing_coalition_rejected():
+        """Reject an incomplete coalition file without creating a result."""
+        instance = make_instance(["A", "B"], [(1000, 0), (2000, 0)])
+        coalition_file = coalition_payload(instance, lambda members: 100 * len(members))
+        coalition_file["coalitions"].pop()
+        status, raw, _stderr = invoke("shapley", [instance, coalition_file])
+>       assert status != 0 and raw is None
+E       assert (0 != 0)
+
+/tests/test_outputs.py:391: AssertionError
+=============================== warnings summary ===============================
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-ot98z_uy'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-wbqmlsqe'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_c2_two_order_marginals - AssertionError...
+FAILED ../tests/test_outputs.py::test_c2_four_order_exact_fractions - Asserti...
+FAILED ../tests/test_outputs.py::test_c2_additive_game_identity - AssertionEr...
+FAILED ../tests/test_outputs.py::test_c2_missing_coalition_rejected - assert ...
+4 failed, 12 deselected, 2 warnings in 0.34s
+
+[c3]
+FF..F                                                                    [100%]
+=================================== FAILURES ===================================
+____________________________ test_c3_three_way_tie _____________________________
+
+    def test_c3_three_way_tie():
+        """Break a final marginal tie toward the lexicographically smaller vector."""
+        instance = make_instance(
+            ["N1", "N2", "N3"],
+            [(100, 0), (200, 0), (300, 0)],
+            caps={"N1": 4, "N2": 4, "N3": 4},
+        )
+        payload = share_payload(10, {"N3": Fraction(10, 3), "N1": Fraction(10, 3), "N2": Fraction(10, 3)})
+        expected = settlement_reference(payload, instance)
+        actual = run_json("settle", [instance, payload])
+>       assert actual == expected
+E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'N1': 3, 'N2': 3, 'N3': 4}}
+
+/tests/test_outputs.py:404: AssertionError
+_______________________ test_c3_multiple_equal_fractions _______________________
+
+    def test_c3_multiple_equal_fractions():
+        """Allocate two cents when two fractions tie above the third."""
+        instance = make_instance(
+            ["A", "B", "C"],
+            [(100, 0), (200, 0), (300, 0)],
+            caps={"A": 6, "B": 6, "C": 6},
+        )
+        payload = share_payload(
+            10,
+            {"C": Fraction(5, 2), "A": Fraction(15, 4), "B": Fraction(15, 4)},
+        )
+        expected = settlement_reference(payload, instance)
+        actual = run_json("settle", [instance, payload])
+>       assert actual == expected
+E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'A': 4, 'B': 4, 'C': 2}}
+
+/tests/test_outputs.py:420: AssertionError
+_______________________ test_c3_binding_cap_reallocates ________________________
+
+    def test_c3_binding_cap_reallocates():
+        """Move cents away from a capped order while minimizing squared error."""
+        instance = make_instance(
+            ["A", "B", "C"],
+            [(100, 0), (200, 0), (300, 0)],
+            caps={"A": 4, "B": 8, "C": 8},
+        )
+        payload = share_payload(
+            10,
+            {"A": Fraction(5), "B": Fraction(3), "C": Fraction(2)},
+        )
+        expected = settlement_reference(payload, instance)
+        actual = run_json("settle", [instance, payload])
+>       assert actual == expected
+E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'A': 4, 'B': 3, 'C': 3}}
+
+/tests/test_outputs.py:483: AssertionError
+=============================== warnings summary ===============================
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-qv1ihxmw'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-26237opk'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_c3_three_way_tie - AssertionError: asse...
+FAILED ../tests/test_outputs.py::test_c3_multiple_equal_fractions - Assertion...
+FAILED ../tests/test_outputs.py::test_c3_binding_cap_reallocates - AssertionE...
+3 failed, 2 passed, 11 deselected, 2 warnings in 0.57s
+
+[e2e]
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+_____________________ test_e2e_generated_six_stop_instance _____________________
+
+    def test_e2e_generated_six_stop_instance():
+        """Match a second six-stop instance with two route and rounding traps."""
+        generator = random.Random(481516)
+        coordinates = [
+            (generator.randint(-5200, 5200), generator.randint(-4700, 4700))
+            for _ in range(6)
+        ]
+        instance = make_instance(
+            ["R1", "R2", "R3", "R4", "R5", "R6"],
+            coordinates,
+            factor=1.27,
+            rate=345,
+            fee=1340,
+        )
+        expected = full_reference(instance)
+        actual = run_json("run", [instance])
+>       assert actual == expected
+E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'...53, ...}, ...}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'R1': 1641, 'R2': 1216, 'R3': 638, 'R4': 2353, ...}}
+E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-R1-R2-R3-R4-R5-R6'}
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+/tests/test_outputs.py:510: AssertionError
+_________________ test_e2e_ten_stop_dynamic_programming_scale __________________
+
+    def test_e2e_ten_stop_dynamic_programming_scale():
+        """Match a ten-stop instance without enumerating every full permutation."""
+        generator = random.Random(2026102201)
+        coordinates = [
+            (generator.randint(-6500, 6500), generator.randint(-5800, 5800))
+            for _ in range(10)
+        ]
+        instance = make_instance(
+            [f"T{index:02d}" for index in range(1, 11)],
+            coordinates,
+            factor=1.31,
+            rate=372,
+            fee=2200,
+        )
+        expected = full_reference(instance, dynamic_routes=True)
+        actual = run_json("run", [instance])
+>       assert actual == expected
+E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'...82, ...}, ...}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'T01': 3185, 'T02': 2694, 'T03': 1990, 'T04': 1982, ...}}
+E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-T01-T02-T03-T04-T05-T06-T07-T08-T09-T10'}
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+/tests/test_outputs.py:529: AssertionError
+=============================== warnings summary ===============================
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-omi9ccsg'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-cz5yap8d'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_e2e_generated_six_stop_instance - Asser...
+FAILED ../tests/test_outputs.py::test_e2e_ten_stop_dynamic_programming_scale
+2 failed, 1 passed, 13 deselected, 2 warnings in 1.11s

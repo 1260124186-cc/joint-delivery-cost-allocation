@@ -1,0 +1,49 @@
+{
+  "instance_id": "cold-chain-demo-20261022",
+  "depot": {
+    "id": "WH",
+    "x_m": 0,
+    "y_m": 0
+  },
+  "stops": [
+    {
+      "id": "S01",
+      "x_m": 4648,
+      "y_m": -3118,
+      "max_settlement_cents": 4000
+    },
+    {
+      "id": "S02",
+      "x_m": 1022,
+      "y_m": -2691,
+      "max_settlement_cents": 4000
+    },
+    {
+      "id": "S03",
+      "x_m": 4581,
+      "y_m": 696,
+      "max_settlement_cents": 3100
+    },
+    {
+      "id": "S04",
+      "x_m": 2781,
+      "y_m": -4066,
+      "max_settlement_cents": 4000
+    },
+    {
+      "id": "S05",
+      "x_m": -3991,
+      "y_m": -2570,
+      "max_settlement_cents": 4000
+    },
+    {
+      "id": "S06",
+      "x_m": -2593,
+      "y_m": 2494,
+      "max_settlement_cents": 4000
+    }
+  ],
+  "road_factor": 1.18,
+  "rate_cents_per_km": 268,
+  "dispatch_fee_cents": 9800
+}

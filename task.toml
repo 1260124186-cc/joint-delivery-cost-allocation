@@ -1,0 +1,27 @@
+schema_version = "1.3"
+
+[task]
+name = "local/joint-delivery-cost-allocation"
+description = "校正联合配送的最优巡回、精确 Shapley 分摊与有上限的整数分币结算"
+authors = [{ name = "Chengcheng Zhang" }]
+keywords = ["route optimization", "Shapley value", "exact arithmetic", "apportionment", "cost allocation"]
+
+[agent]
+timeout_sec = 3600
+
+[environment]
+build_timeout_sec = 900
+cpus = 1
+memory_mb = 2048
+storage_mb = 4096
+gpus = 0
+allow_internet = true
+
+[verifier]
+timeout_sec = 300
+
+[metadata]
+difficulty = "expert"
+category = "H-数学问题"
+tags = ["Python", "组合优化", "Shapley value", "精确有理数", "整数分摊"]
+expert_time_estimate = "4h"

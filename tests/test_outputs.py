@@ -1,6 +1,7 @@
 """Independent checks for exact shared-delivery cost allocation."""
 
 import json
+import os
 import random
 import subprocess
 import sys
@@ -13,6 +14,7 @@ from pathlib import Path
 
 
 WORKSPACE = Path("/workspace")
+CANDIDATE_ENTRY = os.environ.get("TASK_ENTRY", "/workspace/route_share/__main__.py")
 COMMAND = [sys.executable, "-m", "route_share"]
 COMPARE_QUANTUM = Decimal("0.000000000000000001")
 

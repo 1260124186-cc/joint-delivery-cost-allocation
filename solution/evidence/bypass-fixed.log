@@ -1,4 +1,4 @@
-Command: docker run --rm --user 10001:10001 --network host -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-ursak09f/bypass-fixed/workspace:/workspace:ro -v /Users/zhangchengcheng/work/ai-project/Trea/harbor/joint-delivery-cost-allocation/tests:/tests:ro -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-ursak09f/bypass-fixed/logs:/logs harbor-quality:joint-delivery-cost-allocation bash /tests/test.sh
+Command: docker run --rm --user 10001:10001 --network host -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-zas17i73/bypass-fixed/workspace:/workspace:ro -v /Users/zhangchengcheng/work/ai-project/Trea/harbor/joint-delivery-cost-allocation/tests:/tests:ro -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-zas17i73/bypass-fixed/logs:/logs harbor-quality:joint-delivery-cost-allocation bash /tests/test.sh
 Exit: 0
 Reward: 0.0
 stdout:
@@ -12,7 +12,7 @@ Collecting pluggy==1.7.0 (from -r /tests/requirements.txt (line 4))
   Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
 Collecting pygments==2.21.0 (from -r /tests/requirements.txt (line 5))
   Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 516.7 kB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 307.8 kB/s eta 0:00:00
 Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
 Successfully installed iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pygments-2.21.0 pytest-8.4.1
 
@@ -40,7 +40,7 @@ E         Differing items:
 E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 3025, 'members': ['A'], 'tour': ['D', 'A', 'D']}]}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:315: AssertionError
+/tests/test_outputs.py:317: AssertionError
 _____________________ test_c1_two_order_direction_matters ______________________
 
     def test_c1_two_order_direction_matters():
@@ -56,7 +56,7 @@ E         Differing items:
 E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 2239, 'members': ['A'], 'tour': ['D', 'A', 'D']}, {'cost_cents': 6305, 'members': ['B'], 'tour': ['D', 'B', 'D']}, {'cost_cents': 6305, 'members': ['A', 'B'], 'tour': ['D', 'A', 'B', 'D']}]}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:323: AssertionError
+/tests/test_outputs.py:325: AssertionError
 _______________________ test_c1_lexicographic_tie_break ________________________
 
     def test_c1_lexicographic_tie_break():
@@ -72,22 +72,23 @@ E         Differing items:
 E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 600, 'members': ['A1'], 'tour': ['D', 'A1', 'D']}, {'cost_cents': 600, 'members': ['A2'], 'tour': ['D', 'A2', 'D']}, {'cost_cents': 600, 'members': ['A1', 'A2'], 'tour': ['D', 'A1', 'A2', 'D']}]}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:339: AssertionError
+/tests/test_outputs.py:341: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-5fot5vw4'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-o0mp9s_p'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-30pgyy6t'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-3rc6r1t8'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+------------------ generated xml file: /logs/verifier/c1.xml -------------------
 =========================== short test summary info ============================
 FAILED ../tests/test_outputs.py::test_c1_single_order_round_trip - AssertionE...
 FAILED ../tests/test_outputs.py::test_c1_two_order_direction_matters - Assert...
 FAILED ../tests/test_outputs.py::test_c1_lexicographic_tie_break - AssertionE...
-3 failed, 1 passed, 12 deselected, 2 warnings in 0.34s
+3 failed, 1 passed, 12 deselected, 2 warnings in 0.35s
 
 [c2]
 FFFF                                                                     [100%]
@@ -106,11 +107,11 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'total_cost_cents': 18225} != {'total_cost_cents': 150}
 E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 75, 'order_id': 'A'}, {'denominator': 1, 'numerator': 75, 'order_id': 'B'}]}
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 150}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:349: AssertionError
+/tests/test_outputs.py:351: AssertionError
 ______________________ test_c2_four_order_exact_fractions ______________________
 
     def test_c2_four_order_exact_fractions():
@@ -135,11 +136,11 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'total_cost_cents': 18225} != {'total_cost_cents': 432}
 E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 2, 'numerator': 207, 'order_id': 'A1'}, {'denominator': 2, 'numerator': 173, 'order_id': 'A2'}, {'denominator': 2, 'numerator': 199, 'order_id': 'A3'}, {'denominator': 2, 'numerator': 285, 'order_id': 'A4'}]}
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 432}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:369: AssertionError
+/tests/test_outputs.py:371: AssertionError
 ________________________ test_c2_additive_game_identity ________________________
 
     def test_c2_additive_game_identity():
@@ -157,11 +158,11 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'total_cost_cents': 18225} != {'total_cost_cents': 179}
 E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 37, 'order_id': 'N1'}, {'denominator': 1, 'numerator': 59, 'order_id': 'N2'}, {'denominator': 1, 'numerator': 83, 'order_id': 'N3'}]}
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 179}
 E         Use -v to get more diff
 
-/tests/test_outputs.py:382: AssertionError
+/tests/test_outputs.py:384: AssertionError
 ______________________ test_c2_missing_coalition_rejected ______________________
 
     def test_c2_missing_coalition_rejected():
@@ -173,23 +174,24 @@ ______________________ test_c2_missing_coalition_rejected ______________________
 >       assert status != 0 and raw is None
 E       assert (0 != 0)
 
-/tests/test_outputs.py:391: AssertionError
+/tests/test_outputs.py:393: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-ot98z_uy'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-6dl4vlvn'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-wbqmlsqe'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-95p9dxg9'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+------------------ generated xml file: /logs/verifier/c2.xml -------------------
 =========================== short test summary info ============================
 FAILED ../tests/test_outputs.py::test_c2_two_order_marginals - AssertionError...
 FAILED ../tests/test_outputs.py::test_c2_four_order_exact_fractions - Asserti...
 FAILED ../tests/test_outputs.py::test_c2_additive_game_identity - AssertionEr...
 FAILED ../tests/test_outputs.py::test_c2_missing_coalition_rejected - assert ...
-4 failed, 12 deselected, 2 warnings in 0.34s
+4 failed, 12 deselected, 2 warnings in 0.35s
 
 [c3]
 FF..F                                                                    [100%]
@@ -209,7 +211,7 @@ ____________________________ test_c3_three_way_tie _____________________________
 >       assert actual == expected
 E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'N1': 3, 'N2': 3, 'N3': 4}}
 
-/tests/test_outputs.py:404: AssertionError
+/tests/test_outputs.py:406: AssertionError
 _______________________ test_c3_multiple_equal_fractions _______________________
 
     def test_c3_multiple_equal_fractions():
@@ -228,7 +230,7 @@ _______________________ test_c3_multiple_equal_fractions _______________________
 >       assert actual == expected
 E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'A': 4, 'B': 4, 'C': 2}}
 
-/tests/test_outputs.py:420: AssertionError
+/tests/test_outputs.py:422: AssertionError
 _______________________ test_c3_binding_cap_reallocates ________________________
 
     def test_c3_binding_cap_reallocates():
@@ -247,22 +249,23 @@ _______________________ test_c3_binding_cap_reallocates ________________________
 >       assert actual == expected
 E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_remainder_cents': 0, 'settlement_cents': {'A': 4, 'B': 3, 'C': 3}}
 
-/tests/test_outputs.py:483: AssertionError
+/tests/test_outputs.py:485: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-qv1ihxmw'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-68oc4koy'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-26237opk'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-vlpzaede'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+------------------ generated xml file: /logs/verifier/c3.xml -------------------
 =========================== short test summary info ============================
 FAILED ../tests/test_outputs.py::test_c3_three_way_tie - AssertionError: asse...
 FAILED ../tests/test_outputs.py::test_c3_multiple_equal_fractions - Assertion...
 FAILED ../tests/test_outputs.py::test_c3_binding_cap_reallocates - AssertionE...
-3 failed, 2 passed, 11 deselected, 2 warnings in 0.57s
+3 failed, 2 passed, 11 deselected, 2 warnings in 0.58s
 
 [e2e]
 .FF                                                                      [100%]
@@ -290,13 +293,12 @@ E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'R1': 1641, 'R2': 1216, 'R3': 638, 'R4': 2353, ...}}
-E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-R1-R2-R3-R4-R5-R6'}
-E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents...
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 3904, 'members': ['R1'], 'tour': ['D', 'R1', 'D']}, {'cost_cents': 4190, 'members': ['R... 'members': ['R5'], 'tour': ['D', 'R5', 'D']}, {'cost_cents': 5539, 'members': ['R6'], 'tour': ['D', 'R6', 'D']}, ...]}
+E         {'instance_id': 'cold-chain-demo-...
 E         
-E         ...Full output truncated (4 lines hidden), use '-vv' to show
+E         ...Full output truncated (5 lines hidden), use '-vv' to show
 
-/tests/test_outputs.py:510: AssertionError
+/tests/test_outputs.py:512: AssertionError
 _________________ test_e2e_ten_stop_dynamic_programming_scale __________________
 
     def test_e2e_ten_stop_dynamic_programming_scale():
@@ -320,24 +322,24 @@ E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'T01': 3185, 'T02': 2694, 'T03': 1990, 'T04': 1982, ...}}
-E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-T01-T02-T03-T04-T05-T06-T07-T08-T09-T10'}
-E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {...
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': ['WH', 'S06', 'WH']}, ...]} != {'coalitions': [{'cost_cents': 8579, 'members': ['T01'], 'tour': ['D', 'T01', 'D']}, {'cost_cents': 7190, 'members': [...mbers': ['T05'], 'tour': ['D', 'T05', 'D']}, {'cost_cents': 5845, 'members': ['T06'], 'tour': ['D', 'T06', 'D']}, ...]}
+E         {'instance_id': 'cold-chain-demo-...
 E         
-E         ...Full output truncated (4 lines hidden), use '-vv' to show
+E         ...Full output truncated (5 lines hidden), use '-vv' to show
 
-/tests/test_outputs.py:529: AssertionError
+/tests/test_outputs.py:531: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-omi9ccsg'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-y5wmgxxs'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-cz5yap8d'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-ium0n_d5'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+------------------ generated xml file: /logs/verifier/e2e.xml ------------------
 =========================== short test summary info ============================
 FAILED ../tests/test_outputs.py::test_e2e_generated_six_stop_instance - Asser...
 FAILED ../tests/test_outputs.py::test_e2e_ten_stop_dynamic_programming_scale
-2 failed, 1 passed, 13 deselected, 2 warnings in 1.11s
+2 failed, 1 passed, 13 deselected, 2 warnings in 1.13s

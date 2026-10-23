@@ -1,4 +1,4 @@
-Command: docker run --rm --user 10001:10001 --network host -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-rcpj8543/bypass-fixed/workspace:/workspace:ro -v /Users/zhangchengcheng/work/ai-project/Trea/harbor/joint-delivery-cost-allocation/tests:/tests:ro -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-rcpj8543/bypass-fixed/logs:/logs harbor-quality:joint-delivery-cost-allocation bash /tests/test.sh
+Command: docker run --rm --user 10001:10001 --network host -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-dp5wlstj/bypass-fixed/workspace:/workspace:ro -v /Users/zhangchengcheng/work/ai-project/Trea/harbor/joint-delivery-cost-allocation/tests:/tests:ro -v /var/folders/8t/8rw7_pg16cx2c2mkh_cvpz8m0000gn/T/joint-delivery-quality-dp5wlstj/bypass-fixed/logs:/logs harbor-quality:joint-delivery-cost-allocation bash /tests/test.sh
 Exit: 0
 Reward: 0.0
 stdout:
@@ -12,7 +12,7 @@ Collecting pluggy==1.7.0 (from -r /tests/requirements.txt (line 4))
   Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
 Collecting pygments==2.21.0 (from -r /tests/requirements.txt (line 5))
   Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 1.5 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 984.7 kB/s eta 0:00:00
 Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
 Successfully installed iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pygments-2.21.0 pytest-8.4.1
 
@@ -75,11 +75,11 @@ E         Use -v to get more diff
 /tests/test_outputs.py:341: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-979z25vq'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-_qyqqra5'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-3w4tlv8r'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-p8y74jo0'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -88,7 +88,7 @@ E         Use -v to get more diff
 FAILED ../tests/test_outputs.py::test_c1_single_order_round_trip - AssertionE...
 FAILED ../tests/test_outputs.py::test_c1_two_order_direction_matters - Assert...
 FAILED ../tests/test_outputs.py::test_c1_lexicographic_tie_break - AssertionE...
-3 failed, 1 passed, 12 deselected, 2 warnings in 0.51s
+3 failed, 1 passed, 12 deselected, 2 warnings in 0.43s
 
 [c2]
 FFFF                                                                     [100%]
@@ -107,8 +107,8 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 75, 'order_id': 'A'}, {'denominator': 1, 'numerator': 75, 'order_id': 'B'}]}
 E         {'total_cost_cents': 18225} != {'total_cost_cents': 150}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 75, 'order_id': 'A'}, {'denominator': 1, 'numerator': 75, 'order_id': 'B'}]}
 E         Use -v to get more diff
 
 /tests/test_outputs.py:351: AssertionError
@@ -136,8 +136,8 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 2, 'numerator': 207, 'order_id': 'A1'}, {'denominator': 2, 'numerator': 173, 'order_id': 'A2'}, {'denominator': 2, 'numerator': 199, 'order_id': 'A3'}, {'denominator': 2, 'numerator': 285, 'order_id': 'A4'}]}
 E         {'total_cost_cents': 18225} != {'total_cost_cents': 432}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 2, 'numerator': 207, 'order_id': 'A1'}, {'denominator': 2, 'numerator': 173, 'order_id': 'A2'}, {'denominator': 2, 'numerator': 199, 'order_id': 'A3'}, {'denominator': 2, 'numerator': 285, 'order_id': 'A4'}]}
 E         Use -v to get more diff
 
 /tests/test_outputs.py:371: AssertionError
@@ -158,8 +158,8 @@ E       AssertionError: assert {'efficiency_...cents': 18225} == {'efficiency_..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 37, 'order_id': 'N1'}, {'denominator': 1, 'numerator': 59, 'order_id': 'N2'}, {'denominator': 1, 'numerator': 83, 'order_id': 'N3'}]}
 E         {'total_cost_cents': 18225} != {'total_cost_cents': 179}
+E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 1, 'numerator': 37, 'order_id': 'N1'}, {'denominator': 1, 'numerator': 59, 'order_id': 'N2'}, {'denominator': 1, 'numerator': 83, 'order_id': 'N3'}]}
 E         Use -v to get more diff
 
 /tests/test_outputs.py:384: AssertionError
@@ -177,11 +177,11 @@ E       assert (0 != 0)
 /tests/test_outputs.py:393: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-ob6reb82'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-qgpkg2re'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-kdfxkej0'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-osvq7hfs'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -191,7 +191,7 @@ FAILED ../tests/test_outputs.py::test_c2_two_order_marginals - AssertionError...
 FAILED ../tests/test_outputs.py::test_c2_four_order_exact_fractions - Asserti...
 FAILED ../tests/test_outputs.py::test_c2_additive_game_identity - AssertionEr...
 FAILED ../tests/test_outputs.py::test_c2_missing_coalition_rejected - assert ...
-4 failed, 12 deselected, 2 warnings in 0.58s
+4 failed, 12 deselected, 2 warnings in 0.45s
 
 [c3]
 FF..F                                                                    [100%]
@@ -252,11 +252,11 @@ E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_r
 /tests/test_outputs.py:485: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-5dmldx5i'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-7cr0z_uc'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-8x47yy9_'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-0krlznxm'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -265,7 +265,7 @@ E       AssertionError: assert None == {'allocated_total_cents': 10, 'rounding_r
 FAILED ../tests/test_outputs.py::test_c3_three_way_tie - AssertionError: asse...
 FAILED ../tests/test_outputs.py::test_c3_multiple_equal_fractions - Assertion...
 FAILED ../tests/test_outputs.py::test_c3_binding_cap_reallocates - AssertionE...
-3 failed, 2 passed, 11 deselected, 2 warnings in 0.86s
+3 failed, 2 passed, 11 deselected, 2 warnings in 0.71s
 
 [e2e]
 .FF                                                                      [100%]
@@ -293,10 +293,12 @@ E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 20, 'numerator': 32829, 'order_id': 'R1'}, {'denominator': 30, 'numerator': 36487, 'order_... {'denominator': 12, 'numerator': 11609, 'order_id': 'R5'}, {'denominator': 15, 'numerator': 56063, 'order_id': 'R6'}]}
-E         {'coalitions': [{'cost_cents': 13...
+E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'R1': 1641, 'R2': 1216, 'R3': 638, 'R4': 2353, ...}}
+E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-R1-R2-R3-R4-R5-R6'}
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 10553}
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'members': ['S06'], 'tour': [...
 E         
-E         ...Full output truncated (5 lines hidden), use '-vv' to show
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
 
 /tests/test_outputs.py:512: AssertionError
 _________________ test_e2e_ten_stop_dynamic_programming_scale __________________
@@ -322,19 +324,21 @@ E       AssertionError: assert {'coalitions'...01, ...}, ...} == {'coalitions'..
 E         
 E         Omitting 1 identical items, use -vv to show
 E         Differing items:
-E         {'shares': [{'denominator': 30, 'numerator': 92221, 'order_id': 'S01'}, {'denominator': 6, 'numerator': 13027, 'order_...enominator': 60, 'numerator': 217807, 'order_id': 'S05'}, {'denominator': 30, 'numerator': 101023, 'order_id': 'S06'}]} != {'shares': [{'denominator': 315, 'numerator': 1003291, 'order_id': 'T01'}, {'denominator': 1260, 'numerator': 3394759,...or': 1260, 'numerator': 1699919, 'order_id': 'T05'}, {'denominator': 56, 'numerator': 111521, 'order_id': 'T06'}, ...]}
-E         {'coalitions': [{'cost_cents': 13...
+E         {'settlement_cents': {'S01': 3094, 'S02': 2192, 'S03': 3100, 'S04': 2801, ...}} != {'settlement_cents': {'T01': 3185, 'T02': 2694, 'T03': 1990, 'T04': 1982, ...}}
+E         {'instance_id': 'cold-chain-demo-20261022'} != {'instance_id': 'test-T01-T02-T03-T04-T05-T06-T07-T08-T09-T10'}
+E         {'total_cost_cents': 18225} != {'total_cost_cents': 18642}
+E         {'coalitions': [{'cost_cents': 13340, 'members': ['S01'], 'tour': ['WH', 'S01', 'WH']}, {'cost_cents': 11621, 'members...': ['S05'], 'tour': ['WH', 'S05', 'WH']}, {'cost_cents': 12075, 'm...
 E         
-E         ...Full output truncated (5 lines hidden), use '-vv' to show
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
 
 /tests/test_outputs.py:531: AssertionError
 =============================== warnings summary ===============================
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-x_xae0jf'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/tests/pytest-cache-files-6jr2le9b'
     config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
 
 ../home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429
-  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-ftbw8c69'
+  /home/worker/.local/lib/python3.12/site-packages/_pytest/cacheprovider.py:429: PytestCacheWarning: could not create cache path /tests/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/tests/pytest-cache-files-qm4xxpoe'
     config.cache.set("cache/lastfailed", self.lastfailed)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -342,4 +346,4 @@ E         ...Full output truncated (5 lines hidden), use '-vv' to show
 =========================== short test summary info ============================
 FAILED ../tests/test_outputs.py::test_e2e_generated_six_stop_instance - Asser...
 FAILED ../tests/test_outputs.py::test_e2e_ten_stop_dynamic_programming_scale
-2 failed, 1 passed, 13 deselected, 2 warnings in 1.51s
+2 failed, 1 passed, 13 deselected, 2 warnings in 1.35s

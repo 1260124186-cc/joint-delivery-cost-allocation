@@ -13,7 +13,7 @@
     "base_image": "python:3.12.8-alpine@sha256:ba13ef990f6e5d13014e9e8d04c02a8fdb0fe53d6dccf6e19147f316e6cc3a84",
     "dependencies_locked": true,
     "allow_internet": true,
-    "network_reason": "求解器只用 Python 标准库，输入随镜像提供；任务镜像只做离线计算，验证阶段需从 PyPI 按哈希安装 pytest 等测试依赖，真实模型运行阶段由 Harbor 安装所选 agent",
+    "network_reason": "求解器只用 Python 标准库，输入随镜像提供；镜像内固定存放 arm64/amd64 的 tree-sitter 兼容 wheel，避免运行 agent 时保留编译器。验证阶段仍需从 PyPI 按哈希安装 pytest 等测试依赖",
     "architectures": ["amd64", "arm64"]
   },
   "requirements": [

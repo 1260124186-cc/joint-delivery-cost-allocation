@@ -2,9 +2,9 @@
   "status": "pass",
   "builds": 2,
   "no_cache": true,
-  "base_image": "python:3.12.8-slim-bookworm@sha256:2199a62885a12290dc9c5be3ca0681d367576ab7bf037da120e564723292a2f0",
+  "base_image": "python:3.12.8-alpine@sha256:ba13ef990f6e5d13014e9e8d04c02a8fdb0fe53d6dccf6e19147f316e6cc3a84",
   "manifest_sha256": [
-    "65955ef12226915061d72cc7595a2195aaf0c48bfe77a62305d8883b794fac09",
-    "65955ef12226915061d72cc7595a2195aaf0c48bfe77a62305d8883b794fac09"
+    "4d6b74d5efdb441c2e11be12a92b745bfdaa76ef9c80ec4612de522fdd99c506",
+    "4d6b74d5efdb441c2e11be12a92b745bfdaa76ef9c80ec4612de522fdd99c506"
   ]
 }

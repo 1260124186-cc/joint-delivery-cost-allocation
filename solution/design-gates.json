@@ -10,7 +10,7 @@
   },
   "answer_verification": "独立实现枚举每个非空子集的全部门店排列，按 50 位 Decimal 欧氏距离、1e-18 米量化、road_factor 和整数半入规则复算 v(S)；用 Fraction 按 Shapley 权重逐子集求精确值并核对效率性；再用最大余数法独立分配整数分，核对总和、并列次序和逐项差额",
   "environment": {
-    "base_image": "python:3.12.8-slim-bookworm@sha256:2199a62885a12290dc9c5be3ca0681d367576ab7bf037da120e564723292a2f0",
+    "base_image": "python:3.12.8-alpine@sha256:ba13ef990f6e5d13014e9e8d04c02a8fdb0fe53d6dccf6e19147f316e6cc3a84",
     "dependencies_locked": true,
     "allow_internet": true,
     "network_reason": "求解器只用 Python 标准库，输入随镜像提供；任务镜像只做离线计算，验证阶段需从 PyPI 按哈希安装 pytest 等测试依赖，真实模型运行阶段由 Harbor 安装所选 agent",
